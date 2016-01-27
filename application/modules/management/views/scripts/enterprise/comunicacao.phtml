@@ -1,0 +1,207 @@
+<?php
+$this->headScript()->appendFile($this->baseUrl('js/management/appraiser/list.js?x1'))
+    ->appendFile($this->baseUrl('js/management/enterprise.js'));
+
+$competition = $this->competition;
+$canSend = true;
+$enterpriseId = new Model_Enterprise();
+$Appraiser = new Model_Appraiser;
+$executionPontuacaoManager = new Manager_ExecutionPontuacao();
+?>
+<h1 class="title">Comunicar Participantes Estaduais</h1>
+<form action="<?php echo $this->url(array('page' => $this->pageCount, 'format' => 'html')) ?>#lista" id="frm" method="GET">
+    <fieldset></fieldset>
+	<fieldset>
+		<div class="list-table-40">
+			<label class="label-control" for="Uf">UF:</label>
+			<select data-placeholder="Escolha" tabindex="5" id="Uf" class="fancy" name="filter[state_id]" style="width: 100%;">
+				<?php foreach ($this->states as $state) : ?>
+					<?php
+						$stateId = $state->getId();
+						if(isset($this->filter['state_id']) && $stateId == $this->filter['state_id'])
+							$selected = 'selected="selected"';
+						else
+							$selected = '';
+					?>
+					<option value="<?php echo $stateId;?>" <?php echo $selected; ?>><?php echo $state->getUf();?></option>
+				<?php endforeach; ?>
+			</select>
+		</div>
+		<div class="list-table-40">
+		<label class="label-control" for="CompetitionId">Concurso:</label>
+		<select data-placeholder="Escolha" tabindex="10" id="CompetitionId" class="fancy" name="filter[competition_id]" style="width: 100%;">
+            <option value="<?php echo $competition->getId();?>"><?php echo $competition->getDescription();?></option>
+		</select>
+		</div>
+	</fieldset>
+
+	<button style="float: right; margin-top: -70px; margin-right: 40px" type="submit" class="large btn-submit">Buscar</button>
+</form>
+
+<?php  $totale = count($this->enterprises);
+
+if($this->enterprises):
+ ?>
+
+<div class="table-menu header">
+    <?php
+    $total = count($this->winners);
+    $totalw = $total;
+    $label_total = (($total > 0) ? implode(' ', array(
+        $total,
+        implode('', array(
+            'registro',
+            (($total > 1) ? 's' : '')
+        ))
+    )) : 'Nenhuma premiada foi encontrada para esta UF');
+    ?>
+    <hgroup>
+        <a name="lista"></a>
+        <h2><span><?php echo $label_total; ?></span></h2>
+    </hgroup>
+
+    <?php //echo $this->paginationControl($this->enterprises, null, null); ?>
+</div>
+
+<form action="/management/enterprise/comunicacao/format/json" id="winning_notification" method="POST">
+    <input type="hidden" name="state_id" value="<?php echo $this->stateId ?>"/>
+    <input type="hidden" name="competition_id" value="<?php echo $this->competitionId ?>"/>
+
+<?php 
+$cont = 0;
+	foreach ($this->enterprises as $index => $enterprise):
+        if($index == $cont) {
+            $status = $enterprise->getNotificationStatus();
+            if ($status)
+            {
+            if($canSend) {
+                $canSend = false;
+                $responsible = $enterprise->getResponsibleFirstName().' '.$enterprise->getResponsibleSurname();
+                $sentAt = $enterprise->getNotificationSentAt();
+                if(!$sentAt){
+                    $sentAt = 'aguardando';
+                } else {
+                    if($sentAt != ''){
+                        $sentAt = DateTime::createFromFormat('Y-m-d H:i:s', $sentAt);
+                        $sentAt = $sentAt->format('d/m/Y H:i:s');
+                    }
+                }
+                $statusContent = "<label>Usuário: $responsible</label><br/><label>Data: $sentAt</label>";
+            } else {
+                $statusContent = '-';
+            }
+            } else 
+            {
+            	$cont++;
+            }
+        }
+    ?>
+        <input type="hidden" name="enterprise_ids[]" value="<?php echo $enterprise->getId() ?>"/>
+<?php endforeach; 
+?>
+
+    <?php if(!$canSend): ?>
+        <h1 class="title" style="margin-top: 10px">Detalhes do Envio</h1>
+        <p style="font-family: Arial; font-size: 13px; color: #333"><?php echo $statusContent ?></p>
+    <?php endif; ?>
+
+    <div class="table-container">
+        <table class="table">
+            <thead><tr>
+                <th>Empresa</th>
+                <th>UF</th>
+                <th>Ouro</th>
+                <th>Prata</th>
+                <th>Bronze</th>
+                <th>Prêmio</th>
+                <th>RAE</th>
+                <th>Pontuação Geral</th>
+            </tr></thead>
+
+            <tbody>
+            <?php 
+                foreach ($this->winners as $index => $enterprise):  
+                    $fantasyName = $enterprise->getFantasyName(); 
+                    $cnpj = $enterprise->getCnpj();
+                    $raa = $enterprise->getDevolutivePath();
+                    try {
+                    	list ($root, $pasta, $key,$arquivo) = split("/",$raa);
+						$extension_pos = strrpos($arquivo, '.');
+						$fileName = substr($arquivo, 0, $extension_pos) . 'VN' . substr($arquivo, $extension_pos);
+						$raa = "/" . $pasta . "/" .$key . "/" . $fileName;
+                    } catch (Excception $e) {}
+                    // Sandra - calcular pontos totais
+                    $QtdPontosFortes = $enterprise->getQtdePontosFortes();
+                      if($QtdPontosFortes == 12)  $QtdPontosFortes = 20; 
+					  if($QtdPontosFortes == 11)  $QtdPontosFortes = 19;
+					  if($QtdPontosFortes == 10)  $QtdPontosFortes = 18;
+					  if($QtdPontosFortes == 9)   $QtdPontosFortes = 17;
+					  if($QtdPontosFortes == 8)   $QtdPontosFortes = 16;
+					  if($QtdPontosFortes == 7)   $QtdPontosFortes = 14;
+					  if($QtdPontosFortes == 6)   $QtdPontosFortes = 12;
+					  if($QtdPontosFortes == 5)   $QtdPontosFortes = 10;
+					  if($QtdPontosFortes == 4)   $QtdPontosFortes = 8;
+					  if($QtdPontosFortes == 3)   $QtdPontosFortes = 6;
+					  if($QtdPontosFortes == 2)   $QtdPontosFortes = 4;
+					  if($QtdPontosFortes == 1)   $QtdPontosFortes = 2;
+					  if($QtdPontosFortes == 0)   $QtdPontosFortes = 0;
+                    
+                     $enterpriseUserid = $enterpriseId->getUserIdByIdKey($enterprise->getIdKey());
+                     $verificador = $enterprise->getUserId();
+                     $scoreVisita = null;
+                     if ($verificador) $scoreVisita = $Appraiser->getEnterpriseScoreAppraiserAnwserVerificadorData($enterprise->getId(),$enterprise->getUserId());
+                     $NotaAutoAvalVerificador  = $executionPontuacaoManager->calculateExecutionScore(52,$enterpriseUserid,true);
+                     $NotaQuestVisitaVerificador = 0;
+                    if ($scoreVisita)
+	                    if($scoreVisita->count() > 0)
+	                    	$NotaQuestVisitaVerificador = $scoreVisita[0]->getPontosFinal();
+                    
+                    $PontuacaoFinal =  (($NotaAutoAvalVerificador * 0.2) + ($NotaQuestVisitaVerificador * 0.6) + $QtdPontosFortes);
+            ?>
+                <tr class="<?php echo ((($index % 2) == 0) ? 'odd' : 'even'); ?>" data-idkey="<?php echo $enterprise->getIdKey(); ?>" style="height: 45px;">
+                    <td>
+                        <dl style="text-align: left">
+                            <dt title="<?php echo $fantasyName ?>"><b><?php echo $fantasyName ?></b></dt>
+                            <dd class="identity" title="<?php echo $cnpj ?>"><?php echo $cnpj ?></dd>
+                        </dl>
+                    </td>
+
+                    <td class="middle"><span><?php echo $enterprise->getUf() ?></span></td>
+                    <td class="middle"><span><input type="checkbox" <?php if($enterprise->getClassificadoOuro()) echo 'checked' ?> disabled/></span></td>
+                    <td class="middle"><span><input type="checkbox" <?php if($enterprise->getClassificadoPrata()) echo 'checked' ?> disabled/></span></td>
+                    <td class="middle"><span><input type="checkbox" <?php if($enterprise->getClassificadoBronze()) echo 'checked' ?> disabled/></span></td>
+                    <td class="middle"><span><?php echo $enterprise->getPremio() ?></td>
+                    <td class="middle"><dl><dt>
+                        <a href="<?php echo $raa; ?>" title="Baixar RAE" class="report">Baixar RAE</a>
+                    </dt></dl></td>
+                    <td class="middle">
+                        <span>
+                        	<?php echo number_format($PontuacaoFinal, 1 , ',', '.');?> 
+                            <?php //echo(Model_Enterprise::getGeneralPointsFor(
+                                //$enterprise->getNegociosTotal(), $enterprise->getStatusA1(), $enterprise->getPontosA1(),
+                                //$enterprise->getStatusA2(),  $enterprise->getPontosA2(),  $enterprise->getStatusA3(),
+                                //$enterprise->getPontosA3(), $enterprise->getQtdePontosFortes()
+                            //)); ?>
+                        </span>
+                    </td>
+                </tr>
+            <?php endforeach; 
+             ?>
+            </tbody>
+        </table>
+    </div>
+    <br/><br/>
+    <?php if($canSend): ?>
+        <h1 class="title">Mensagem</h1>
+        <br/>
+        <!-- textarea name="message" <?php //if($this->hasFinalists) echo 'readonly' ?> style="width: 99%; height: 200px"><?php //echo $this->defaultMessage ?></textarea-->
+        <textarea name="message" style="width: 99%; height: 200px"><?php echo $this->defaultMessage ?></textarea>
+        <button style="float: right" type="submit" class="large btn-submit">Enviar</button>
+    <?php endif; ?>
+</form>
+
+<div class="table-menu footer">
+    <?php //echo $this->paginationControl($this->enterprises, null, null); ?>
+</div>
+
+<?php endif; ?>

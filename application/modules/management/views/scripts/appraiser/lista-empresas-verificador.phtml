@@ -1,0 +1,196 @@
+
+<?php 
+if ($this->userAuth()->getRoleId() == $this->configRegistry()->acl->roleVerificadorId) {}
+$this->headScript()->captureStart() ?>
+
+var QSTN_ID = <?php echo $this->questionnaireId; ?>;
+var ENTERPRISE_ID_KEY = '<?php echo $this->enterpriseIdKey; ?>';
+var ADMIN_MENU = <?php echo $this->request()->getParam('menu-admin', 0); ?>;
+
+<?php $this->headScript()->captureEnd() ?>
+<?php $userIdLogged = Zend_Auth::getInstance()->getIdentity()->getUserId();  ?>
+
+<?php
+if (count($this->getAllEnterprise) >= 1):
+    foreach ($this->getAllEnterprise  as $key=>$enterprise_one){
+        $avaliacaoStatusTopo = $enterprise_one->getCheckerStatus(); 
+        
+    }
+?>
+
+<script>
+function sleep() {
+  window.location.reload();
+}
+</script>
+
+<table class="table">
+  <caption></caption>
+  <thead>
+    <tr>
+        <th style="height: 100px">Classificada</th>
+      <th>Empresa</th>
+      <th>UF</th>
+      <th>RAA</th>
+      <th>Relat.<br>Interno</th>
+      <th>Verificar <br>Questionário <br>de Auto Aval.</br> Negócios</th>
+      <th>Verificar <br>Questionário <br>de Visita</th>
+      <th>Verificar <br>Critério <br>de Avaliação</th>
+      <th>Gerar <br>Relatório <br>de Avaliação</th>
+      <th>Status</th>
+      <th>Enviar <br>ao Gestor</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+ 
+<?php
+
+  foreach ($this->getAllEnterprise as $index => $enterprise) :
+ 
+  //print_r($enterprise);
+    //$teste = include APPLICATION_PATH . '/modules/management/views/scripts/devolutiveVerificador/index.phtml';
+     
+    $raa = $enterprise->getDevolutivePath();
+    $scoreGestao = '';//$enterprise->getProgressGestao();
+    $fantasyName = $enterprise->getFantasyName();
+    $socialName = $enterprise->getSocialName();
+    $avaliacaoStatus = $enterprise->getCheckerStatus();
+    
+    
+
+    $CNPJ = trim($enterprise->getCnpj());
+    $CPF = trim($enterprise->getCpfUser());
+    $enterpriseType = $CPF; //($enterpriseTypeId == '1')?$CNPJ:$CPF;
+    $UF = trim($enterprise->getUf());
+
+    $survey = $this->baseUrl('/management/verificacao/index/enterprise-id-key/' 
+        . $enterprise->getIdKey());
+    
+    $verificarCriterio = $this->baseUrl('/management/verificacao/criterioavaliacao/enterprise-id-key/' 
+        . $enterprise->getIdKey());
+    
+    $verificarquestionarioNegocio = $this->baseUrl('/management/verificacao/questionarionegocio/enterprise-id-key/' 
+        . $enterprise->getIdKey(). '/block/'. Zend_Registry::get('configDb')->qstn->currentBlockIdNegocios);
+    
+    $GerarRelatorio = $this->baseUrl('/management/devolutive-verificador/index/enterprise-id-key/' 
+        . $enterprise->getIdKey());
+    
+    //$enterprise->getDevolutivePath();
+    
+    
+    $EnviarGestor = $this->baseUrl('/management/appraiser/gestor/enterprise-id-key/' 
+        . $enterprise->getIdKey());
+?>
+    <tr class="<?php echo ((($index % 2) == 0) ? 'odd' : 'even'); ?>" data-idkey="<?php echo $enterprise->getIdKey(); ?>">
+      <td>
+          <dl style="text-align: left; margin-left: 5px">
+          <dt title="<?php echo $fantasyName; ?>"><b><?php echo (($enterprise->getNameUser() != '') ? substr($enterprise->getNameUser(), 0, 60) : '--'); ?></b></dt>
+          <dd class="identity" title="<?php echo $enterpriseType; ?>"><?php echo $enterprise->getCpfUser(); ?></dd>
+        </dl>
+
+      </td>
+      
+        <td style="width: 300px; height: 45px;" title="<?php echo $socialName; ?>">
+          <dl style="text-align: left; margin-left: 5px">
+            <dt><b><?php echo (($fantasyName != '') ? substr($fantasyName, 0, 60) : '--'); ?></b></dt>
+            <dd class="identity"><?php echo $CNPJ; ?></dd>
+          </dl>
+        </td>
+        
+      <td class="middle"><i><?php echo $UF; ?></i></td>
+      <td class="middle">
+        <dl>
+          <dt>
+            <a href="<?php echo $raa; ?>" title="Baixar RAA" class="download-raa" target="blank">Baixar RAA</a>
+          </dt>
+        </dl>
+      </td>
+      <td class="middle">
+        <dl>
+          <dt>
+            <a href="<?php echo $this->baseUrl("management/verificacao/report/enterprise-id-key/{$enterprise->getIdKey()}");?>#report" title="Relatório Interno" class="download-raa" target="blank">Interno</a>
+
+            
+          </dt>
+        </dl>
+      </td>
+            <td class="middle">
+        <dl>
+            <dt>
+                <a href="<?php echo $verificarquestionarioNegocio; ?>" title="Verificar Questionário de Negócios" 
+                   class="answer-survey" >Verificar Questionário de Negócios
+                </a>
+            </dt>
+        </dl>
+      </td>
+      <td class="middle">
+        <dl>
+            <dt>
+                <a href="<?php echo $survey; ?>" title="Verificar Questionário de Visita" 
+                   class="answer-survey" >Verificar Questionário de Visita</a>
+            </dt>
+        </dl>
+      </td>
+
+      <td class="middle">
+        <dl>
+            <dt>
+                <a href="<?php echo $verificarCriterio; ?>" title="Critério de Avaliação" 
+                   class="answer-survey" >Critério de Avaliação</a>
+            </dt>
+        </dl>
+      </td>
+                <?php
+                  
+            //$avaliacao_results = Vtx_Util_PsmnAvaliacao::statusReport($avaliacaoStatus);
+			
+			// RETORNA STATUS DO PREENCHIMENTO DOS QUESTIONARIOS DO VERIFICADOR
+			switch ($avaliacaoStatus){
+				case "I": $avaliacaoStatus = "25%"; break;
+				
+				case "II": $avaliacaoStatus = "50%"; break;
+				
+				case "III": $avaliacaoStatus = "75%"; break;
+				
+				case "IIII": $avaliacaoStatus = "100%"; break;
+				
+				default: $avaliacaoStatus = "0%"; break;
+			}
+            
+          ?>
+
+      <td class="middle">
+      <?php
+       if($avaliacaoStatus == "75%"):
+      ?>
+        <dl>
+            <dt>
+                <a href="<?php echo $GerarRelatorio; ?>" title="Gerar Relatório de Avaliação" onClick="javascript:setTimeout(sleep,5000);" class="answer-survey" target="_blank"  >Gerar relatório de Avaliação</a>
+            </dt>
+        </dl>
+       <?php endif; ?>  
+      </td>      
+      <td style="padding:5px;">
+    <?php echo $avaliacaoStatus; ?>  
+      </td>
+      <?php
+       if($avaliacaoStatus == "100%"):
+      ?>
+      <td class="middle">
+        <dl>
+            <dt>
+            
+                <a href="<?php echo $EnviarGestor; ?>" title="Enviar ao Gestor" 
+                   class="answer-survey" >Enviar ao Gestor</a>
+            
+            </dt>
+        </dl>
+      </td>
+       <?php endif; ?>      
+    </tr>
+<?php endforeach; ?>
+  </tbody>
+<?php endif; ?>
+</table>

@@ -1,0 +1,36 @@
+0000000000000000000000000000000000000000 5571e50ee1f7eef4724b2f03ed127e2e35752111 Rafael Santana <rafa.eu.santana@gmail.com> 1433117889 -0300	commit (initial): commit inicial
+5571e50ee1f7eef4724b2f03ed127e2e35752111 3972dc36647256d38de55e07d83a9324de2c8cd4 root <root@localhost.localdomain> 1437227743 -0300	commit: iniciando projeto
+3972dc36647256d38de55e07d83a9324de2c8cd4 3972dc36647256d38de55e07d83a9324de2c8cd4 root <root@localhost.localdomain> 1437227802 -0300	checkout: moving from master to karinaBranch
+3972dc36647256d38de55e07d83a9324de2c8cd4 3972dc36647256d38de55e07d83a9324de2c8cd4 root <root@localhost.localdomain> 1437227960 -0300	checkout: moving from karinaBranch to luizBranch
+3972dc36647256d38de55e07d83a9324de2c8cd4 3972dc36647256d38de55e07d83a9324de2c8cd4 root <root@localhost.localdomain> 1437227967 -0300	checkout: moving from luizBranch to abraaoBranch
+3972dc36647256d38de55e07d83a9324de2c8cd4 3972dc36647256d38de55e07d83a9324de2c8cd4 root <root@localhost.localdomain> 1437227978 -0300	checkout: moving from abraaoBranch to karinaBranch
+3972dc36647256d38de55e07d83a9324de2c8cd4 3972dc36647256d38de55e07d83a9324de2c8cd4 root <root@localhost.localdomain> 1437228008 -0300	checkout: moving from karinaBranch to master
+3972dc36647256d38de55e07d83a9324de2c8cd4 3972dc36647256d38de55e07d83a9324de2c8cd4 root <root@localhost.localdomain> 1437228039 -0300	checkout: moving from master to karinaBranch
+3972dc36647256d38de55e07d83a9324de2c8cd4 12038f0f450b1123c942e3d7b0f045b5594f4d3f root <root@localhost.localdomain> 1437228261 -0300	commit: adicionando arquivos
+12038f0f450b1123c942e3d7b0f045b5594f4d3f 3972dc36647256d38de55e07d83a9324de2c8cd4 root <root@localhost.localdomain> 1437228301 -0300	checkout: moving from karinaBranch to master
+3972dc36647256d38de55e07d83a9324de2c8cd4 12038f0f450b1123c942e3d7b0f045b5594f4d3f root <root@localhost.localdomain> 1437228403 -0300	merge karinaBranch: Fast-forward
+12038f0f450b1123c942e3d7b0f045b5594f4d3f 3972dc36647256d38de55e07d83a9324de2c8cd4 root <root@localhost.localdomain> 1437228427 -0300	checkout: moving from master to luizBranch
+3972dc36647256d38de55e07d83a9324de2c8cd4 12038f0f450b1123c942e3d7b0f045b5594f4d3f root <root@localhost.localdomain> 1437228433 -0300	merge master: Fast-forward
+12038f0f450b1123c942e3d7b0f045b5594f4d3f 3972dc36647256d38de55e07d83a9324de2c8cd4 root <root@localhost.localdomain> 1437228446 -0300	checkout: moving from luizBranch to abraaoBranch
+3972dc36647256d38de55e07d83a9324de2c8cd4 12038f0f450b1123c942e3d7b0f045b5594f4d3f root <root@localhost.localdomain> 1437228454 -0300	merge master: Fast-forward
+12038f0f450b1123c942e3d7b0f045b5594f4d3f 12038f0f450b1123c942e3d7b0f045b5594f4d3f root <root@localhost.localdomain> 1437228552 -0300	checkout: moving from abraaoBranch to karinaBranch
+12038f0f450b1123c942e3d7b0f045b5594f4d3f be28c7a41b8027176995c260efbf591161fa6828 root <root@localhost.localdomain> 1437234481 -0300	commit: incluindo Zend
+be28c7a41b8027176995c260efbf591161fa6828 12038f0f450b1123c942e3d7b0f045b5594f4d3f root <root@localhost.localdomain> 1437234523 -0300	checkout: moving from karinaBranch to master
+12038f0f450b1123c942e3d7b0f045b5594f4d3f be28c7a41b8027176995c260efbf591161fa6828 root <root@localhost.localdomain> 1437234553 -0300	merge karinaBranch: Fast-forward
+be28c7a41b8027176995c260efbf591161fa6828 be28c7a41b8027176995c260efbf591161fa6828 root <root@localhost.localdomain> 1437234572 -0300	checkout: moving from master to karinaBranch
+be28c7a41b8027176995c260efbf591161fa6828 698a84cb369645abad98aec5c89598d2050fada8 root <root@localhost.localdomain> 1437326655 -0300	commit: versão karina
+698a84cb369645abad98aec5c89598d2050fada8 be28c7a41b8027176995c260efbf591161fa6828 root <root@localhost.localdomain> 1437326684 -0300	checkout: moving from karinaBranch to master
+be28c7a41b8027176995c260efbf591161fa6828 be28c7a41b8027176995c260efbf591161fa6828 root <root@localhost.localdomain> 1437326706 -0300	checkout: moving from master to masterBackup
+be28c7a41b8027176995c260efbf591161fa6828 698a84cb369645abad98aec5c89598d2050fada8 root <root@localhost.localdomain> 1437327195 -0300	checkout: moving from masterBackup to karinaBranch
+698a84cb369645abad98aec5c89598d2050fada8 885969a215d48d94dec9a6a5e61176d7071a2978 root <root@localhost.localdomain> 1437328369 -0300	commit: application.ini
+885969a215d48d94dec9a6a5e61176d7071a2978 5e9908da121491681ef0287eaab95e707d885868 root <root@localhost.localdomain> 1437328516 -0300	commit: .htaccess
+5e9908da121491681ef0287eaab95e707d885868 0fb5a4dd5c19d1cb2c19a248b6cd1c1d6e531dd6 root <root@localhost.localdomain> 1437328518 -0300	checkout: moving from karinaBranch to abraaoBranch
+0fb5a4dd5c19d1cb2c19a248b6cd1c1d6e531dd6 5e9908da121491681ef0287eaab95e707d885868 root <root@localhost.localdomain> 1437329112 -0300	checkout: moving from abraaoBranch to karinaBranch
+5e9908da121491681ef0287eaab95e707d885868 5797c3436bc2c74bcd55695fd3630665f12afac7 root <root@localhost.localdomain> 1437329449 -0300	commit (merge): resolvendo conflitos com Abraao
+5797c3436bc2c74bcd55695fd3630665f12afac7 eae91e1863843025928e7e1ffb19eeb6e76eea2b root <root@localhost.localdomain> 1437329802 -0300	commit (merge): resolvendo conflitos com Luiz
+eae91e1863843025928e7e1ffb19eeb6e76eea2b be28c7a41b8027176995c260efbf591161fa6828 Karina <you@example.com> 1437329913 -0300	checkout: moving from karinaBranch to master
+be28c7a41b8027176995c260efbf591161fa6828 eae91e1863843025928e7e1ffb19eeb6e76eea2b Karina <you@example.com> 1437329920 -0300	merge karinaBranch: Fast-forward
+eae91e1863843025928e7e1ffb19eeb6e76eea2b eae91e1863843025928e7e1ffb19eeb6e76eea2b Karina <you@example.com> 1437329930 -0300	checkout: moving from master to karinaBranch
+eae91e1863843025928e7e1ffb19eeb6e76eea2b faef81b408e4503704889df5701c0f3f7af8103b Karina <you@example.com> 1437357929 -0300	commit: comitando alterações para fazer o merge e subir pra homologação
+faef81b408e4503704889df5701c0f3f7af8103b 4994b2cf6854f6e75db682896089f62a31f4b686 Karina <you@example.com> 1437358105 -0300	commit (merge): resolvendo conflitos com abraaoBranch
+4994b2cf6854f6e75db682896089f62a31f4b686 a406c57b8f35c8d14ddb5bd571805e0e65e0eba9 Karina <you@example.com> 1437358751 -0300	commit (merge): resolvendo conflitos com luizBranch

@@ -1,0 +1,131 @@
+<?php
+$this->headScript()->appendFile($this->baseUrl('js/management/appraiser/list.js?x1'));
+/**
+view usada para gerar conteudo do fetchall em .CSV
+*/
+//CONFIGURACOES
+$separador = ";";
+$novalinha = "\n";
+// FIM CONFIGURACOES
+$enterpriseId = new Model_Enterprise();
+$Appraiser = new Model_Appraiser;
+$executionPontuacaoManager = new Manager_ExecutionPontuacao();
+
+$competitionId = (isset($this->filter['competition_id']))? $this->filter['competition_id'] : $this->competitionId;
+
+echo "Razão Social{$separador}CPF{$separador}Nome Fantasia{$separador}CNPJ{$separador}Email{$separador}UF{$separador}";
+
+echo "Vencedor Ouro{$separador}";
+echo "Prata{$separador}";
+echo "Bronze{$separador}";
+echo "Desclassificar{$separador}";
+// echo "P. Geral + Bônus{$separador}";
+// echo "Bônus{$separador}";
+// // echo "Devolver p/ Verificador{$separador}";
+// // echo "Relato Interno{$separador}";
+// echo "Pontos Negócios{$separador}";
+// echo "Média Relato{$separador}";
+echo "Pontuação Geral{$separador}";
+echo "Auto Aval. Negócios{$separador}";
+echo "Questionário de Visita{$separador}";
+echo "Critério de Avaliação{$separador}";
+
+echo "Prêmio{$separador}";
+if ($competitionId == 2013) {
+    echo "Pontos Empreendedorismo{$separador}";
+}
+//echo "Raa{$separador}";
+
+echo $novalinha;
+
+$i = 1;
+if (count($this->getAllEnterprise) >= 1) :
+   foreach ($this->getAllEnterprise as $enterprise) {
+       
+        $socialName = rr ( $enterprise->getSocialName() );
+        $inscricaoEstadual = ''; //rr2 ( $enterprise->getInscricaoEstadual() );
+        $fantasyName = rr ( $enterprise->getFantasyName() );
+        $enterpriseTypeId = 2; //$enterprise->getEnterpriseTypeId();
+        $CNPJ = trim($enterprise->getCnpj());
+        $CPF = trim($enterprise->getCpfUser());
+        $enterpriseType = ($enterpriseTypeId == '1')?$CNPJ:$CPF;
+        $getClassificadoOuroNacional = ($enterprise->getClassificadoOuroNacional() == '1' )?'SIM':'NÃO';
+        $getClassificadoPrataNacional = ($enterprise->getClassificadoPrataNacional() == '1')?'SIM':'NÃO';
+        $getClassificadoBronzeNacional = ($enterprise->getClassificadoBronzeNacional() == '1')?'SIM':'NÃO';
+        $desclassificado = (($enterprise->getDesclassificarFase3Nacional() == '1') ? 'SIM' : 'NÃO');
+        
+        $pontosGeral = (($enterprise->getPontosGeral() != null) ? $enterprise->getPontosGeral() : '--');
+        $qtPf = $enterprise->getQtdePontosFortes();
+        if ($qtPf === false) {
+           $bonus = '0';
+        } elseif ($qtPf >= 8) {
+           $bonus = '20%';
+        }  elseif ($qtPf >= 5) {
+           $bonus = '10%';
+        } else {
+           $bonus = '0';
+        }
+        $pontosNegocios = number_format($enterprise->getNegociosTotal()*10, 1 , ',', '.').'%';
+        $mediaRelato = number_format($enterprise->getMediaPontos(), 1 , ',', '.');
+        $premio = str_replace('Microempreendedora', 'Microemp.', $enterprise->getDescriptionEca());
+        if ($competitionId == 2013) {
+            $pontosEmpreende = number_format($enterprise->getPontosEmpreendedorismo(), 2 , ',', '.');
+        }
+        $email = trim($enterprise->getEmailDefault());
+        // Sandra - alterar para apresentar os mesmos valores que estão na tela
+        $QtdPontosFortes = $enterprise->getQtdePontosFortes();
+        if($QtdPontosFortes == 12)  $QtdPontosFortes = 20;
+        if($QtdPontosFortes == 11)  $QtdPontosFortes = 19;
+        if($QtdPontosFortes == 10)  $QtdPontosFortes = 18;
+        if($QtdPontosFortes == 9)   $QtdPontosFortes = 17;
+        if($QtdPontosFortes == 8)   $QtdPontosFortes = 16;
+        if($QtdPontosFortes == 7)   $QtdPontosFortes = 14;
+        if($QtdPontosFortes == 6)   $QtdPontosFortes = 12;
+        if($QtdPontosFortes == 5)   $QtdPontosFortes = 10;
+        if($QtdPontosFortes == 4)   $QtdPontosFortes = 8;
+        if($QtdPontosFortes == 3)   $QtdPontosFortes = 6;
+        if($QtdPontosFortes == 2)   $QtdPontosFortes = 4;
+        if($QtdPontosFortes == 1)   $QtdPontosFortes = 2;
+        if($QtdPontosFortes == 0)   $QtdPontosFortes = 0;
+        $enterpriseUserid = $enterpriseId->getUserIdByIdKey($enterprise->getIdKey());
+        // Sandra - $nacional = 8 por ser finalista nacional
+        $scoreVisita = $Appraiser->getEnterpriseScoreAppraiserAnwserVerificadorData($enterprise->getEnterpriseId(),$enterprise->getCheckerId(), null, 8);
+        $NotaAutoAvalVerificador  = $executionPontuacaoManager->calculateExecutionScore(52,$enterpriseUserid,true,$enterprise->getCheckerId());
+        if($scoreVisita->count() > 0)
+        	$NotaQuestVisitaVerificador = $scoreVisita[0]->getPontosFinal();
+        else
+        	$NotaQuestVisitaVerificador = 0;
+        $PontuacaoFinal =  (($NotaAutoAvalVerificador * 0.2) + ($NotaQuestVisitaVerificador * 0.6) + $QtdPontosFortes);
+
+        echo $socialName ? $socialName : $enterpriseType; //Razao Social
+        echo $separador;
+        echo $CPF.$separador;
+        echo $fantasyName.$separador; //Nome Fantasia
+        echo $CNPJ.$separador; //CPF/CNPJ
+        echo $email.$separador;
+        echo rr2($enterprise->getUf()).$separador;
+        echo $getClassificadoOuroNacional.$separador;
+        echo $getClassificadoPrataNacional.$separador;
+        echo $getClassificadoBronzeNacional.$separador;
+        echo $desclassificado.$separador;
+//         echo number_format($pontosGeral*100, 1 , ',', '.') . '%'.$separador;
+//         echo $bonus.$separador;
+//         echo $pontosNegocios.$separador;
+//         echo $mediaRelato.$separador;
+        echo number_format($PontuacaoFinal, 1 , ',', '.').$separador;
+		echo number_format($NotaAutoAvalVerificador, 1 , ',', '.').$separador;
+		echo $NotaQuestVisitaVerificador.$separador;
+		echo $QtdPontosFortes.$separador;
+        echo $premio.$separador;
+        if ($competitionId == 2013) {
+            echo $pontosEmpreende.$separador;
+        }
+                
+        echo $novalinha; 
+        $i = $i + 1;
+   }
+   
+   echo $novalinha; 
+   
+endif;
+
