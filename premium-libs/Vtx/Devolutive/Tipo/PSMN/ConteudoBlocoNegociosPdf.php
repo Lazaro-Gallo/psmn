@@ -66,7 +66,7 @@ De acordo com a sua resposta serão apresentados seus Pontos Fortes e/ou suas Op
          */
         
         $titulo_parte1 = "Autoavaliação do Negócio"; // Devolutiva Parte I - Devolutiva Parte I - 
-        $texto_parte1 = "Seguem abaixo os comentários gerados a partir da autoavaliação do negócio que você respondeu ao se candidatar ao PSMN 2014. ";
+        $texto_parte1 = "Seguem abaixo os comentários gerados a partir da autoavaliação do negócio que você respondeu ao se candidatar ao PSMN 2016. ";
         $texto_parte1 .= "De acordo com a sua resposta serão apresentados seus Pontos Fortes e/ou suas Oportunidades de Melhoria. ";
         
         $this->objMakePdf->AddPage();

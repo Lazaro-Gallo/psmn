@@ -37,7 +37,11 @@ class Questionnaire_RegisterController extends Vtx_Action_Abstract
         $this->view->hasECAC = false;
         $this->view->editStatus = false;
         $this->view->subscriptionPeriodIsClosed = !$this->subscriptionPeriodIsOpen();
-        
+        $Configuration = new Model_Configuration;
+        // Sandra - acessar ciclo atual
+        $currentYearRow = $Configuration->getConfigurationByConfKey('competitionIdKey');
+        $this->view->ciclo = $currentYearRow->getConfValue();
+        $this->view->cicloAnt = $this->view->ciclo - 1;
         // caso primeiro cadastro apos busca do login
         if ($this->_getParam('forward', null) == 'true' and !$this->_getParam('id')) {
             $this->view->registerPresidentData = array('cpf' => $this->_getParam('cpf', null));

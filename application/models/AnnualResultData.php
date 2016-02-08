@@ -43,7 +43,11 @@ class Model_AnnualResultData
     public function createAnnualResultDataByAlternative($annualResultId, $alternativeId)
     {
         // utilizar transaction externa.
-        $currentYear = Zend_Registry::get('config')->util->currentYear;
+        // Sandra - buscar ciclo atual do configuration
+        //$currentYear = Zend_Registry::get('config')->util->currentYear;
+    	$Configuration = new Model_Configuration;
+        $currentYearRow = $Configuration->getConfigurationByConfKey('competitionIdKey');
+        $currentYear = $currentYearRow->getConfValue();
         for ($i = 1; $i <= 3; $i++ ){
             $annualResultRowData = DbTable_AnnualResultData::getInstance()->createRow()
                 ->setAnnualResultId($annualResultId)

@@ -70,6 +70,6 @@
 
 <footer>
     <div id="footer">
-      <p>© Copyright Vorttex 2012. Todos os direitos reservados.</p>
+      <p>© Copyright FNQ 2012. Todos os direitos reservados.</p>
     </div>
 </footer>

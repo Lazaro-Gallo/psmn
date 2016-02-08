@@ -290,26 +290,26 @@ class Vtx_Util_Array
         return $criterioNumero? $pontuacoes[$criterioNumero] : $pontuacoes;
     }
     
-    public static function ciclosSescoop($programaId) {
+//     public static function ciclosSescoop($programaId) {
         
-        switch ($programaId) {
-            case 131 : 
-                $ciclo = 'PDGC 2013';
-                break;
-            case '132'  : 
-                $ciclo = 'Prêmio 2013';
-                break;
-            case 141  :
-                $ciclo = 'PDGC 2014';
-                break;
-            case '142'   :
-                $ciclo = 'Prêmio 2014';
-                break;
-            default:
-                $ciclo = '';
-                break;
-        }
-    return $ciclo;
-    }
+//         switch ($programaId) {
+//             case 131 : 
+//                 $ciclo = 'PDGC 2013';
+//                 break;
+//             case '132'  : 
+//                 $ciclo = 'Prêmio 2013';
+//                 break;
+//             case 141  :
+//                 $ciclo = 'PDGC 2014';
+//                 break;
+//             case '142'   :
+//                 $ciclo = 'Prêmio 2014';
+//                 break;
+//             default:
+//                 $ciclo = '';
+//                 break;
+//         }
+//     return $ciclo;
+//     }
     
 }

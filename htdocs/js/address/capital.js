@@ -4,10 +4,6 @@
  * os IDs dos Estados são iguais da tabela Sescoop.State
  * 
  * @access		public
- * @package     vorttex
- * @subpackage	vorttex.js
- * @author		Marco Cianci (marco.cianci@vorttex.com.br)
- * @copyright	Copyright (c) 2012, Vorttex (http://www.vorttex.com.br)
 **/
 
 var capitalCity = [];

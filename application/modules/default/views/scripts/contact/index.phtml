@@ -13,10 +13,10 @@ include realpath(dirname(__FILE__) . '/../includes/menu/notlogged.phtml');
 <?php
 ///<div id="welcome">
 ?>
-
+ 
 <div id="content">
-    <h1>Mulher de Negócios 2014 :: Contato</h1>
-
+    <!-- h1>Mulher de Negócios 2014 :: Contato</h1-->
+	<h1>Mulher de Negócios <?php echo $this->ciclo;?> :: Contato</h1>
     <?php if (isset($this->itemSendSuccess)):?>
         <?php if ($this->itemSendSuccess):?>
             <div class="notice success">

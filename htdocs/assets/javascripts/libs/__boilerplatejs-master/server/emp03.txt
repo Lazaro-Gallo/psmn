@@ -2,7 +2,7 @@
 	"firstName" : "Alice",
 	"lastName" : "Allison",
 	"age" : 23,
-	"email":"alice@99x.lk",
+	"email":"mulherdenegocios@fnq.org.br",
 	"averageSales" : 10500,
 	"imageId":"./server/emp03.png"
 }

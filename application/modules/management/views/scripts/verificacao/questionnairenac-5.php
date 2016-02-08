@@ -52,7 +52,7 @@
           </div>
           <div class="helper-questions">
 
-              <p class="title-helper-questions" style="">Perguntas facilitadoras:</p>
+              <p class="title-helper-questions" style="">Escolha uma Opção:</p>
               <?php echo $supportingText; ?>
 
           </div>
@@ -147,55 +147,13 @@
 <div id='questionnaire-intro'>
     <div class='fb-content'>
         <div class='header'>
-            <h1>Questionário de Autoavaliação da Gestão do Prêmio SEBRAE Mulher de Negócios - ciclo 2015</h1>
+            <h1>Questionário de Autoavaliação da Gestão do Prêmio SEBRAE Mulher de Negócios - ciclo 2016</h1>
         </div>
 
-        <p>Esta Autoavaliação da Gestão aborda os temas da gestão empresarial que são considerados na análise das
-            candidatas concorrendo ao ciclo 2015 do Prêmio SEBRAE Mulher de Negócios (PSMN).</p>
-        <p>Nela são apresentados 16 tópicos da gestão empresarial em um pequeno negócio (MPE). Antes de responder sobre
-            um determinado tópico, leia e reflita sobre as afirmações apresentadas e, após isso, escolha a opção de
-            resposta que melhor reflita sua situação atual. Para saber ainda mais clique no ícone, que uma
-            contextualização referencial será apresentada.</p>
-        <p>Responda da forma mais realista possível, pois uma devolutiva apontando os pontos fortes e oportunidades de
-            melhoria será gerada a partir de suas respostas. Além disso, suas respostas serão validadas por um avaliador
-            do Prêmio, caso sua empresa passe para a etapa de visitas, prevista para aquelas candidatas que se
-            destacarem em termos de gestão e do relato enviado. <u>As candidatas visitadas que não evidenciarem o que
-            tiverem respondido na autoavaliação da gestão ou que foi descrito no relato serão desclassificadas</u>.</p>
-        <p>Para cada um dos tópicos de gestão você deverá informar o grau de satisfação com sua atuação como empresária
-            usando a escala abaixo:</p>
-
-        <ol>
-            <li><strong>Totalmente Satisfeita</strong> - quando todas as afirmações do tópico forem verdadeiras;</li>
-            <li><strong>Muito Satisfeita</strong> - quando a maioria (metade mais uma) das afirmações do tópico for verdadeira;</li>
-            <li><strong>Pouco Satisfeita</strong> - quando algumas (metade ou menos) das afirmações do tópico forem verdadeiras;</li>
-            <li><strong>Nada Satisfeita</strong> - quando nenhuma das informações do tópico for verdadeira.</li>
-        </ol>
-
-        <p>Os tópicos estão agrupados conforme os temas de gestão abaixo, a partir dos quais será gerada um gráfico com
-            o percentual de atendimento de cada tema, que fará parte da devolutiva, assim como os pontos fortes e
-            oportunidades de melhoria conforme o Modelo de Excelência da Gestão, disseminado pela FNQ.</p>
-
-        <hr/>
-
-        <p class='helping-affirmations'>Exemplo</p>
-        <p>Tópico: Sobre a gestão da minha empresa:</p>
-
-        <div class='example'>
-            <ul>
-                <li>Minha gestão é adequada para meus clientes e fornecedores;</li>
-                <li>Nunca preciso alterar a forma como vendo meus produtos;</li>
-                <li>Tenho uma equipe de colaboradores motivados;</li>
-                <li>Tenho clientes satisfeitos;</li>
-                <li>Fico feliz com os resultados da empresa.</li>
-            </ul>
-        </div>
-
-        <p>( <strong>X</strong> ) Totalmente satisfeita ( ou seja, considero todas afirmações acima como verdadeiras
-            para o tópico em questão: Gestão da Empresa)</p>
-        <p>( &nbsp;&nbsp;&nbsp; ) Muito Satisfeita</p>
-        <p>( &nbsp;&nbsp;&nbsp; ) Pouco Satisfeita</p>
-        <p>( &nbsp;&nbsp;&nbsp; ) Nada Satisfeita</p>
-
+        <p>Esta Autoavaliação da Gestão aborda os temas da gestão empresarial que são considerados na análise das candidatas concorrendo ao ciclo 2016 do Prêmio SEBRAE Mulher de Negócios (PSMN).  </p>
+        <p>Nela são apresentados 16 tópicos da gestão empresarial aplicáveis a um pequeno negócio. Para responder a autoavaliação, escolha a opção de resposta que mais refletir a realidade em sua empresa.</p>
+        <p>Seja o mais realista possível, pois uma devolutiva apontando os pontos fortes e as oportunidades de melhoria será gerada a partir de suas respostas. Além disso, suas respostas poderão ser validadas por um avaliador do Prêmio, caso sua empresa passe para a etapa de visitas, prevista para aquelas candidatas que se destacarem em termos de gestão e do relato enviado.</p> 
+        <p><u>As candidatas visitadas que não evidenciarem o que tiverem respondido na autoavaliação da gestão, assim como descrito no relato, serão desclassificadas.</u>.</p>
         <div class='close'>
             <button class='large btn-submit'><b>Responder Questionário</b></button>
         </div>

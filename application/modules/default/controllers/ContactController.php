@@ -16,9 +16,12 @@ class ContactController extends Vtx_Action_Abstract
             return;
         }
         
+        $Configuration = new Model_Configuration;
         $data = $this->getRequest()->getParams();
-
-        $to = 'projeto.sescoop.fnq@vorttex.com.br';
+        // Sandra - acessar ciclo atual
+        $currentYearRow = $Configuration->getConfigurationByConfKey('competitionIdKey');
+        $this->view->ciclo = $currentYearRow->getConfValue();
+        $to = 'mulherdenegocios@fnq.org.br';
         $subject = 'Mulher de Negócios 2014 :: Contado enviado pelo site';
         $message = nl2br($data['contact']['message']);
 

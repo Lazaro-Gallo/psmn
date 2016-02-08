@@ -59,7 +59,12 @@ class Model_Enterprise {
 
 
         $creationDateTS = Vtx_Util_Date::format_dateToTimeStamp($creationDate);
-        $dtLimite = Vtx_Util_Date::format_dateToTimeStamp('2014-03-01');
+        //$dtLimite = Vtx_Util_Date::format_dateToTimeStamp('2014-03-01');
+// Sandra - data de inscrição não pode ser maior que um ano
+        $Configuration = new Model_Configuration;
+        $currentYearRow = $Configuration->getConfigurationByConfKey('competitionIdKey');
+        $anteriorYear = $currentYearRow->getConfValue() - 1;
+        $dtLimite = Vtx_Util_Date::format_dateToTimeStamp($anteriorYear.'-03-01');
 
         $cDTS = date('d/m/Y',$creationDateTS);
             $rule = '0';

@@ -2,7 +2,6 @@
 /**
  * Description of QueueController
  *
- * @author everton silva
  */
 class Cli_QueueController extends Vtx_Action_Abstract 
 {

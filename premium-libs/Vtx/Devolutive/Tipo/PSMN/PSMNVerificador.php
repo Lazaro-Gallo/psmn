@@ -364,7 +364,7 @@ class Vtx_Devolutive_Tipo_PSMN_PSMN {
 
         $to = $this->devolutive->getArrEnterprise();
         $to = $to['E-mail'];
-        $from = 'psmn@vorttex.com.br';
+        $from = 'mulherdenegocios@fnq.org.br';
         $subject = 'Obrigado por participar do Questionário';
         $message = 'Caro(a) ,
                         <br /><br />

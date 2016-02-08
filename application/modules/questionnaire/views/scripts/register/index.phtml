@@ -339,7 +339,7 @@ if ($this->hasEligibility != 0) {
         </fieldset>
         <fieldset>
           <div class="list-table-45">
-            <label class="label-control" for="AnnualRevenue">Porte da Empresa em 2014 (R$): *</label>
+            <label class="label-control" for="AnnualRevenue">Porte da Empresa em <?php echo $this->cicloAnt;?> (R$): *</label>
             <select tabindex="28" data-placeholder="Escolha" id="AnnualRevenue" class="fancy {required:true}" style="width:350px;" name="enterprise[annual_revenue]">
               <option value=""></option>
               <?php foreach (Vtx_Util_Array::annualRevenuePsmn() as $key => $annualRevenue) : ?>
@@ -647,7 +647,7 @@ if ($this->hasEligibility != 0) {
                 <?php */ ?>
                 </label>
                 <input tabindex="61" type="checkbox" name="president[agree] fleft" id="Agree" value="1" class="checkbox {required:true}" checked="checked" />
-                <label class="label-inline term-participation" for="Agree" class="inline" style="font-weight: bold; margin-right: 50px; ">Aceito participar do Prêmio SEBRAE Mulher de Negócios, conforme regulamento do Prêmio, ciclo 2015</label>
+                <label class="label-inline term-participation" for="Agree" class="inline" style="font-weight: bold; margin-right: 50px; ">Aceito participar do Prêmio SEBRAE Mulher de Negócios, conforme regulamento do Prêmio, ciclo 2016</label>
             </fieldset>
           <?php endif; ?>
 

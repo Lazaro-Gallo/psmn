@@ -5,6 +5,11 @@ class ErrorController extends Vtx_Action_Abstract
 
     public function errorAction()
     {
+    	// Sandra - acessar ciclo atual
+    	$Configuration = new Model_Configuration;
+    	$currentYearRow = $Configuration->getConfigurationByConfKey('competitionIdKey');
+    	$this->view->ciclo = $currentYearRow->getConfValue();
+    	
         $errors = $this->_getParam('error_handler');
         
         if (!$errors || !$errors instanceof ArrayObject) {

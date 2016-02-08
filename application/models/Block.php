@@ -305,7 +305,7 @@ class Model_Block
         $cache = $this->cache->load($nameCache);
         
         $origem = "--->vem do cache---";
-        
+        $cache = false;
         //recupera do cache
         if ($cache == false) 
         {               

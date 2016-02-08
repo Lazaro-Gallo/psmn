@@ -616,7 +616,7 @@ class DbTable_Enterprise extends Vtx_Db_Table_Abstract
 
         $this->appendQueryFilters($query, $loggedUserId, $filter);
 
-        $query->group('E.Id');
+        $query->group('E.Id');echo $query;die;
 
         return $this->fetchAll($query);
     }

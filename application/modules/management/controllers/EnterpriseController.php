@@ -67,9 +67,14 @@ class Management_EnterpriseController extends Vtx_Action_Abstract {
         $modelRegional = new Model_Regional;
         $Neighborhood = new Model_Neighborhood;
         $Regiao = new Model_Regiao;
+$Configuration = new Model_Configuration;
         $modelEnterpriseCategoryAward = new Model_EnterpriseCategoryAward;
         $enterprise = new Model_Enterprise();
         $ApeEvaluationVerificador = new Model_ApeEvaluationVerificador();
+// Sandra - acessar ciclo atual
+        $currentYearRow = $Configuration->getConfigurationByConfKey('competitionIdKey');
+        $this->view->ciclo = $currentYearRow->getConfValue();
+        $this->view->cicloAnt = $this->view->ciclo - 1;
 	
         $format = $this->_getParam('format');
         $this->view->getAllEducations = $this->Education->getAll();
@@ -1087,7 +1092,12 @@ class Management_EnterpriseController extends Vtx_Action_Abstract {
         //if(!isset($filter['competition_id'])) $filter['competition_id'] = Zend_Registry::get('configDb')->competitionId;
         $filter['competition_id'] = Zend_Registry::get('configDb')->competitionId;
         $this->view->states = $this->State->getByUserLocality($filter['user_id']);
-        $this->view->competition = $this->modelCompetition->getByYear(2015);
+        // Sandra - acessar ciclo anterior
+        $Configuration = new Model_Configuration;
+        $currentYearRow = $Configuration->getConfigurationByConfKey('competitionIdKey');
+        $this->view->ciclo = $currentYearRow->getConfValue();
+        $this->view->competition = $this->modelCompetition->getByYear($this->view->ciclo);
+        //$this->view->competition = $this->modelCompetition->getByYear(2014);
         $this->view->filter = $filter;
 
         if($this->getRequest()->isPost()) {
