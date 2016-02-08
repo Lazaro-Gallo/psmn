@@ -1,4 +1,14 @@
 
+<script language="javascript">
+
+function Digita(valor)
+{
+var digitado = document.getElementById('alternativeItem1').value;
+var letra = "A";
+if (digitado == letra) document.getElementById('san')= 'selected';
+
+}
+</script> 
 
 <h1 class="title tquiz">Autoavaliação do <?php echo $this->blockCurrent->getValue(); // Questionário de  ?></h1>
 
@@ -52,7 +62,7 @@
       ?>
 
       <div id="tab-<?php echo $cont; ?>" class="tab-item" style="height: auto">
-        <form action="" class="formsubmitfull" data-question-id="<?php echo $questionId; ?>">
+        <form action="" class="formsubmitfull" data-question-id="<?php echo $questionId; ?>" method="POST">
           <div class="label">
             <span class="number"><?php echo $cont++; ?>.</span>
             <span class="summary"><?php echo $questionSummary; ?></span>
@@ -77,17 +87,35 @@
 
           <div class="answers" style="height: 146px">
             <?php
-              $contPesos = 1; 
+//               $contPesos = 1; 
+//               foreach ($question['Alternatives'] as $alternativeId => $alternative):
+//             ?>
+<!--                <div id="<?php //echo $pesos[$contPesos++]; ?>" class="answer">
+               <span class="face"></span> 
+                <input type="radio" value="<?php //echo $alternativeId; ?>" name="question[<?php //echo $questionId; ?>]" 
+                id="alternativeItem<?php //echo $alternativeId; ?>" tabindex="-1" <?php //echo $disabled ?>/>
+                <label class="label-inline" for="alternativeItem<?php //echo $alternativeId; ?>">
+                   <span class="radio-button"></span> 
+                  <?php //echo $alternative['AlternativeValue']; ?>
+                 </label>                       
+               </div> -->
+            <?php //endforeach; ?>
+            <?php $san="";?>
+            <input id="sand" name="sand" type="hidden" value="">
+            <?php
+              $contPesos = 1;
+              
               foreach ($question['Alternatives'] as $alternativeId => $alternative):
             ?>
               <div id="<?php echo $pesos[$contPesos++]; ?>" class="answer">
                 <span class="face"></span>
-                <input type="radio" value="<?php echo $alternativeId; ?>" name="question[<?php echo $questionId; ?>]" 
-                id="alternativeItem<?php echo $alternativeId; ?>" tabindex="-1" <?php echo $disabled ?>/>
+                
+                <input type="radio" value="<?php echo $alternative['AlternativeValue']; ?>" name="question[<?php echo $questionId; ?>]" 
+                id="alternativeItem<?php echo $alternativeId; ?>" tabindex="-1" onclick="Digita(this)" <?php echo $disabled ?> <?php echo $_POST['sand'];?><?php $i = "'question[".$questionId."]'"; isset($_POST['question[1]']) && ($_POST['question[1]'] == $alternative['AlternativeValue']) ? "checked" : " " ?>/>
                 <label class="label-inline" for="alternativeItem<?php echo $alternativeId; ?>">
                   <span class="radio-button"></span>
                   <?php echo $alternative['AlternativeValue']; ?>
-                </label>                      
+                </label>      
               </div>
             <?php endforeach; ?>
             <div class="fill">
