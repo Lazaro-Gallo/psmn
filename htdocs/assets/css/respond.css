@@ -18,7 +18,7 @@
     margin: -3px 15px 0 0;
 }
 
-[data-question-id] .label .details {
+[data-question-id] .label .details { 
     font-family: "Lato";
     font-size: 16px;
     background: #ef814b;
@@ -119,7 +119,8 @@
 
 .helper-questions{
     float:left;
-    margin-top: 10px;
+  	
+  	position:relative;
     font-family: Lato;
     color: #666
 }

@@ -1,15 +1,22 @@
+<script type="text/javascript">
+function escrever(e, obj){
+	//var keycode = window.event.keycod;
+	alert(obj.value);
+	//$(document).on('keydown.ans', "A,B");
+	if (event == "A") { 
+        document.find('input.radioA').attr('checked', true).trigger('change').focus();
+	}
+	else {
+		document.find('input.radioB').attr('checked', true).trigger('change').focus();
+	}
 
-<script language="javascript">
-
-function Digita(valor)
-{
-var digitado = document.getElementById('alternativeItem1').value;
-var letra = "A";
-if (digitado == letra) document.getElementById('san')= 'selected';
-
-}
-</script> 
-
+	}
+</script>
+<script type="text/javascript">
+function libera(){
+	document.on('keydown.ans', "A,B");
+	}
+</script>
 <h1 class="title tquiz">Autoavaliação do <?php echo $this->blockCurrent->getValue(); // Questionário de  ?></h1>
 
         <?php if (isset($this->enterpriseRow) and isset($this->isViewAdmin) and $this->isViewAdmin): ?>
@@ -62,16 +69,16 @@ if (digitado == letra) document.getElementById('san')= 'selected';
       ?>
 
       <div id="tab-<?php echo $cont; ?>" class="tab-item" style="height: auto">
-        <form action="" class="formsubmitfull" data-question-id="<?php echo $questionId; ?>" method="POST">
+        <form action="" class="formsubmitfull" data-question-id="<?php echo $questionId; ?>">
           <div class="label">
             <span class="number"><?php echo $cont++; ?>.</span>
-            <span class="summary"><?php echo $questionSummary; ?></span>
-            <a class="details">Saiba mais</a>
+            <span clas="summary" style="line-height:22px;"><?php echo $questionSummary; ?></span>
+            <span  style="align:right;"><a class="details">Saiba mais</a></span>
+          <br /><br />
           </div>
-          <div class="helper-questions">
-
-              <p class="title-helper-questions" style="">Escolha uma Opção:</p>
-              <?php echo $supportingText; ?>
+          <div class="helper-questions" style="position:relative;">
+              <p class="title-helper-questions">Escolha uma Opção:</p>
+              <p> <?php echo $supportingText; ?></p>
 
           </div>
 
@@ -87,37 +94,20 @@ if (digitado == letra) document.getElementById('san')= 'selected';
 
           <div class="answers" style="height: 146px">
             <?php
-//               $contPesos = 1; 
-//               foreach ($question['Alternatives'] as $alternativeId => $alternative):
-//             ?>
-<!--                <div id="<?php //echo $pesos[$contPesos++]; ?>" class="answer">
-               <span class="face"></span> 
-                <input type="radio" value="<?php //echo $alternativeId; ?>" name="question[<?php //echo $questionId; ?>]" 
-                id="alternativeItem<?php //echo $alternativeId; ?>" tabindex="-1" <?php //echo $disabled ?>/>
-                <label class="label-inline" for="alternativeItem<?php //echo $alternativeId; ?>">
-                   <span class="radio-button"></span> 
-                  <?php //echo $alternative['AlternativeValue']; ?>
-                 </label>                       
-               </div> -->
-            <?php //endforeach; ?>
-            <?php $san="";?>
-            <input id="sand" name="sand" type="hidden" value="">
-            <?php
-              $contPesos = 1;
-              
-              foreach ($question['Alternatives'] as $alternativeId => $alternative):
+                $contPesos = 1; 
+                foreach ($question['Alternatives'] as $alternativeId => $alternative):
             ?>
               <div id="<?php echo $pesos[$contPesos++]; ?>" class="answer">
-                <span class="face"></span>
-                
-                <input type="radio" value="<?php echo $alternative['AlternativeValue']; ?>" name="question[<?php echo $questionId; ?>]" 
-                id="alternativeItem<?php echo $alternativeId; ?>" tabindex="-1" onclick="Digita(this)" <?php echo $disabled ?> <?php echo $_POST['sand'];?><?php $i = "'question[".$questionId."]'"; isset($_POST['question[1]']) && ($_POST['question[1]'] == $alternative['AlternativeValue']) ? "checked" : " " ?>/>
+              <span class="face"></span>  
+                <input type="radio" value="<?php echo $alternativeId; ?>" name="question[<?php echo $questionId; ?>]" 
+                id="alternativeItem<?php echo $alternativeId; ?>" tabindex="-1" <?php echo $disabled ?>/>
                 <label class="label-inline" for="alternativeItem<?php echo $alternativeId; ?>">
-                  <span class="radio-button"></span>
+                   <span class="radio-button"></span>  
                   <?php echo $alternative['AlternativeValue']; ?>
-                </label>      
-              </div>
+                  </label>                        
+              </div>  
             <?php endforeach; ?>
+
             <div class="fill">
               <div class="status-fill"></div>
             </div>            
