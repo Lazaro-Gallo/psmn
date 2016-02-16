@@ -657,6 +657,58 @@ var registerModule = (function () {
                             $divError.hide();
                             return true;
                         },
+
+/*
+ * Author: Wlamir
+ * Data: 11/02/2016
+ * Requisito: RQF07 - Separação por URL do cadastro. Se possivel em 3 (Cadastro Empresa, Cadastro Representante e Sucesso)
+ * Solicitante: Rafael Jacobe - FNQ
+ */                        
+                        empresa: function(json, $statusText, xhr, $form)  {
+
+                            if (!($statusText == 'empresa') || !json.itemSuccess) {
+                                $('.error-box').html(json.messageError);
+                                $(document).scrollTo('.error-box');
+                                 $divError.show('bounce');
+                                 $form.data('submited', false);
+                                setTimeout(function(){escroll();}, 250);
+                                return;
+                            }
+                            if (json.redirectUrlRegister) {
+                                window.location = json.redirectUrlRegister;
+                                return;
+                            }
+                            if (json.loadUrlRegister) {
+                                $('div.content').load(json.loadUrlRegister);
+                                return;
+                            }
+                        },                        
+                        
+                        representante: function(json, $statusText, xhr, $form)  {
+
+                            if (!($statusText == 'representante') || !json.itemSuccess) {
+                                $('.error-box').html(json.messageError);
+                                $(document).scrollTo('.error-box');
+                                 $divError.show('bounce');
+                                 $form.data('submited', false);
+                                setTimeout(function(){escroll();}, 250);
+                                return;
+                            }
+                            if (json.redirectUrlRegister) {
+                                window.location = json.redirectUrlRegister;
+                                return;
+                            }
+                            if (json.loadUrlRegister) {
+                                $('div.content').load(json.loadUrlRegister);
+                                return;
+                            }
+                        },
+                        /*
+                         * Author: Wlamir
+                         * Data: 11/02/2016
+                         * Requisito: RQF07 - Separação por URL do cadastro. Se possivel em 3 (Cadastro Empresa, Cadastro Representante e Sucesso)
+                         * Solicitante: Rafael Jacobe - FNQ
+                         */                              
                         success: function(json, $statusText, xhr, $form)  {
 
                             if (!($statusText == 'success') || !json.itemSuccess) {
