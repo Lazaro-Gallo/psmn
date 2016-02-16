@@ -140,6 +140,12 @@ if ($this->hasEligibility != 0) {
 
       <div id="tabs-1">
         <fieldset>
+            <script>
+	            $(function(){
+	            	registerModule.pushGAPageview('/questionnaire/register#empresa');
+	            	registerModule.trackGARegisterSuccessConversion();
+	            });
+            </script>           
           <div class="help-block">Esta área permite que a candidata realize o cadastro dos dados da Empresa.</div>
           <div class="error-box autoScroll" id="errors-tab-1" data-name-scroll="msgError2"></div>
           <label class="label-control" for="CategoryAwardId">Categoria do premio: *</label>
@@ -380,6 +386,12 @@ if ($this->hasEligibility != 0) {
 
         <a href="#tabs-2"  tabindex="32" class="form-button-tab-nav btn-submit" style="font-size: 16px"><span class="icon" data-icon=""></span> <b>Próximo</b></a>
      <p>&nbsp;</p>
+            <script>
+	            $(function(){
+	            	registerModule.pushGAPageview('/questionnaire/register#representante');
+	            	registerModule.trackGARegisterSuccessConversion();
+	            });
+            </script>        
       </div>
       <div id="tabs-2">
         <div class="help-block">Esta área permite que a candidata realize o cadastro dos dados pessoais.</div>
@@ -578,7 +590,7 @@ if ($this->hasEligibility != 0) {
             <div class="list-table-45">
               <label class="label-control" for="Keypass">Confirmação de senha: *</label>
               <input tabindex="54" id="Keypass" type="password" name="user[keypass_confirm]" size="128" maxlength="128" class="w187 input list-table-100 {required:true}" value="<?php if ($this->registerUserData) { echo $this->registerUserData['keypass_confirm']; } ?>" />
-            </div>
+            </div>         
           <?php endif; ?>
         <?php
         $password_hint = isset($this->registerUserData['password_hint'])?$this->registerUserData['password_hint']:null;
