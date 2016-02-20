@@ -3,7 +3,7 @@ $this->headScript()
     ->prependFile($this->baseUrl('js/validation/lib/jquery.metadata.js'))
     ->prependFile($this->baseUrl('js/validation/jquery.validate.min.js'));
 
-//$this->headLink()->prependStylesheet($this->baseUrl('css/custom-theme/jquery-ui-1.8.23.custom.css'));
+// $this->headLink()->prependStylesheet($this->baseUrl('css/custom-theme/jquery-ui-1.8.23.custom.css'));
 
 include realpath(dirname(__FILE__) . '/../menus/admin.phtml');
 ?>
@@ -43,31 +43,46 @@ include realpath(dirname(__FILE__) . '/../menus/admin.phtml');
        </div>
     <?php endif; ?>
 
-
-    <?php echo $this->paginationControl($this->getAllQuestionnaire); ?>
-    <div class="clear"></div>
-    <table class="striped tight" border="0" cellpadding="0" cellspacing="0" width="100%">
-        <caption></caption>
+    <div class="table-menu header">
+<?php
+$total = $this->getAllQuestionnaire->getTotalItemCount();
+$label_total = (($total > 0) ? implode(' ', array(
+  $total,
+  implode('', array(
+    'registro',
+    (($total > 1) ? 's' : '')
+  ))
+)) : 'Nenhum registro encontrado');
+?>
+   <hgroup><h2>Questionários - <span><?php echo $label_total; ?></span></h2></hgroup>
+      <?php echo $this->paginationControl($this->getAllQuestionnaire, null, null); ?>
+    </div>
+        
+    <?php // echo $this->paginationControl($this->getAllQuestionnaire); ?>
+    <!-- table class="striped tight" border="0" cellpadding="0" cellspacing="0" width="100%" -->
+   <table id="table-details">    
+    <caption></caption>
         <colgroup>
             <col class="firstCol" />
             <col class="" />
             <col class="" />
             <col class="" />
-            <col style="width:85px" />
+            <col class="" />
+            <col style="width:130px" />
         </colgroup>
         <thead>
             <tr>
                 <th rowspan="2" nowrap> Título </th>
                 <th rowspan="2" nowrap>Descrição</th>
                 <th nowrap colspan="2" style="padding-bottom: 2px">Período de Execução</th>
-                <th rowspan="2" nowrap>Inscrição Pública Termina Em</th>
-                <th rowspan="2" nowrap>Inscrição Interna Termina Em</th>
-                <th class="lastTd" rowspan="2"> Ações </th>
+                <th rowspan="2" wrap>Inscrição Pública Termina em</th>
+                <th rowspan="2" wrap>Inscrição Interna Termina em</th>
+                <th class="lastTd" rowspan="2" style="width:100px"> Ações </th>
             </tr>
             <tr>
-                <th nowrap style="width:85px" class="colspan">Data Início</th>
-                <th nowrap style="width:85px" class="colspan">Data Fim</th>
-            </tr>
+                <th nowrap style="width:85px">Data Início</th>
+                <th nowrap style="width:85px">Data Fim</th>
+             </tr>
         </thead>
         <tbody>
             
@@ -84,17 +99,11 @@ include realpath(dirname(__FILE__) . '/../menus/admin.phtml');
                     <td nowrap style="text-align:center;"><?php echo Vtx_Util_Date::format_dma($questionnaire->getInternalSubscriptionEndsAt()); ?></td>
                     <td class="center">
                         <?php if ($this->loggedAllowed('edit', 'management:questionnaire')): ?>
-                            <a href="<?php echo $this->baseUrl('management/questionnaire/edit/id/'.$questionnaire->getId());?>" title="Editar questionário"><span class="ico edit">Editar</span></a>
+                            <a href="<?php echo $this->baseUrl('management/questionnaire/edit/id/'.$questionnaire->getId());?>" title="Editar questionário"><span class="ico edit">Editar </span></a>
                         <?php endif; ?> 
-
                         <?php if ($this->loggedAllowed('delete', 'management:questionnaire')): ?>
-                            <a href="<?php echo $this->baseUrl('management/questionnaire/delete/id/'.$questionnaire->getId());?>" title="Excluir questionário" class="delete confirm"><span class="ico delete">Excluir</span></a>
+                            <a href="<?php echo $this->baseUrl('management/questionnaire/delete/id/'.$questionnaire->getId());?>" title="Excluir questionário" class="delete confirm"><span class="ico delete"> Excluir</span></a>
                         <?php endif; ?>
-                            
-                        <?php //if ($this->loggedAllowed('index', 'management:privilege')): ?>
-                            <!--<a href="#<?php //echo $this->baseUrl('management/questionnaire/view/id/'.$questionnaire->getId());?>"><span class="ico view">Visualizar</span></a>-->
-                        <?php //endif; ?>
-                            
                             
                     </td>
                 </tr>
@@ -104,9 +113,9 @@ include realpath(dirname(__FILE__) . '/../menus/admin.phtml');
             ?>
         </tbody>
     </table>
-    <div class="clear"></div>
-    <?php echo $this->paginationControl($this->getAllQuestionnaire); ?>
-    <hr class="clear" />
+    <div class="table-menu footer">
+    <?php echo $this->paginationControl($this->getAllQuestionnaire, null, null); ?>
+    </div>
 </div>
 
 

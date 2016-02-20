@@ -208,9 +208,13 @@ if(Zend_Auth::getInstance()->hasIdentity()){
                         </li>
                     <?php endif; ?>
 
-<?php if ($this->loggedAllowed('index', 'management:configuration')): ?>
-                        <li class="">
-                            <a href="<?php echo $this->baseUrl('management/configuration') ?>">Configurações</a>
+<?php // if ($this->loggedAllowed('index', 'management:configuration')): ?>
+<?php if ($this->loggedAllowed('index', 'management:questionnaire')): ?>
+<li class="">
+                            <a href="
+                            <?php //echo $this->baseUrl('management/configuration') ?>
+                            <?php echo $this->baseUrl('management/questionnaire') ?>
+                            ">Configurações</a>
                         </li>
                     <?php endif; ?>
 
