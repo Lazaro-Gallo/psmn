@@ -53,6 +53,7 @@ $label_total = (($total > 0) ? implode(' ', array(
     (($total > 1) ? 's' : '')
   ))
 )) : 'Nenhum registro encontrado');
+
 ?>
    <hgroup><h2>Questionários - <span><?php echo $label_total; ?></span></h2></hgroup>
       <?php echo $this->paginationControl($this->getAllQuestionnaire, null, null); ?>
